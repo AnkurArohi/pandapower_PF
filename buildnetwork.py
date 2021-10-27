@@ -1,6 +1,7 @@
-import networkcreator
 import pandapower as pp
-from networkelems.bus import Bus
+
+from pandapowerTest import networkcreator
+from pandapowerTest.networkelems.bus import Bus
 from pandapowerTest.networkelems.line import Line
 from pandapowerTest.networkelems.load import Load
 from pandapowerTest.networkelems.slack import Slack
