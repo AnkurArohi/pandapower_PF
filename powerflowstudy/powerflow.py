@@ -42,7 +42,7 @@ def datamodelfolder():
         os.makedirs(path)
 
 
-class Run_pf(object):
+class RunPf(object):
     def __init__(self, name, net):
         self.name = name
         self.net = net
@@ -64,7 +64,7 @@ class Run_pf(object):
         return self
 
     def execute(self):
-        pp.runpp(self.net,calculate_voltage_angles=True , init="dc")
+        pp.runpp(self.net,calculate_voltage_angles=True , init="auto")
         #pp.runpp(self.net)
         print(self.net)
         pp.diagnostic(self.net, report_style="compact", warnings_only=True)

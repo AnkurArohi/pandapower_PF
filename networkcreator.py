@@ -17,8 +17,8 @@ class CreateDatamodel:
         return pp.create_bus(netname, vn_kv=voltage, name=name)
 
     # create slack
-    def createslack(self, netname, bus, voltagepu, name):
-        return pp.create_ext_grid(netname, bus=bus, vm_pu=voltagepu, name=name)
+    def createslack(self, netname, bus, voltagepu, name,min_p_mw, max_p_mw):
+        return pp.create_ext_grid(netname, bus=bus, vm_pu=voltagepu, name=name,min_p_mw=-1000, max_p_mw=1000)
 
     def createload(self, netname, bus, p_mw, q_mvar, name):
         return pp.create_load(netname, bus=bus, p_mw=p_mw, q_mvar=q_mvar, name=name)

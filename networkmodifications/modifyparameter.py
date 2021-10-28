@@ -1,8 +1,8 @@
 import pandapower as pp
-from pandapowerTest.powerflowstudy.powerflow import Run_pf
+from pandapowerTest.powerflowstudy.powerflow import RunPf
 
 
-class UpdateValues(Run_pf):
+class UpdateValues(RunPf):
     def __init__(self, name):
         super().__init__(name,None)
         self.detailednet=super().buildnetwork()

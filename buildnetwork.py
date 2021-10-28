@@ -40,6 +40,9 @@ class BuildNetwork:
             self.createlinedata(self.bus_ident, self.lines, self.net, run_pf, self.lines_ident)
 
             self.createtrafodata(self.bus_ident, self.net, run_pf, self.trafos, self.trafos_ident)
+            ##Generators defined for OPF
+            g0 = pp.create_gen(self.net, self.bus_ident["BUS 4"], p_mw=10, min_p_mw=0, max_p_mw=80, vm_pu=1.01, controllable=True)
+            g1 = pp.create_gen(self.net, self.bus_ident["BUS 5"], p_mw=10, min_p_mw=0, max_p_mw=100, vm_pu=1.01, controllable=True)
         else:
             print("Example network is provided datamodel is not built")
         # switch after bus and line
@@ -49,7 +52,8 @@ class BuildNetwork:
         return self
 
     def createtrafodata(self, bus_ident, net, run_pf, trafos, trafos_ident=None):
-        trafo1 = Trafo(net, bus_ident.get("BUS 1"), bus_ident.get("BUS 2"), "0.4 MVA 20/0.4 kV", "Trafo")
+        #trafo1 = Trafo(net, bus_ident.get("BUS 1"), bus_ident.get("BUS 2"), "0.4 MVA 20/0.4 kV", "Trafo")
+        trafo1 = Trafo(net, bus_ident.get("BUS 1"), bus_ident.get("BUS 2"), "100 MVA 220/110 kV", "Trafo")
         ######more trafos here append them below
         trafos.append(trafo1)
         for trafo in trafos:
@@ -58,7 +62,11 @@ class BuildNetwork:
                                                          trafo.trafoname)
 
     def createlinedata(self, bus_ident, lines, net, run_pf, lines_ident):
-        line1 = Line(net, bus_ident.get("BUS 2"), bus_ident.get("BUS 3"), "Line", 0.1, "NAYY 4x50 SE")
+        line1 = Line(net, bus_ident.get("BUS 2"), bus_ident.get("BUS 3"), "Line", 0.1, "149-AL1/24-ST1A 110.0")
+        lines.append(line1)
+        line1 = Line(net, bus_ident.get("BUS 3"), bus_ident.get("BUS 4"), "Line 2", 100,  "149-AL1/24-ST1A 110.0")
+        lines.append(line1)
+        line1 = Line(net, bus_ident.get("BUS 4"), bus_ident.get("BUS 5"), "Line 3", 100,  "149-AL1/24-ST1A 110.0")
         lines.append(line1)
         for line in lines:
             line_str = line.linename
@@ -66,22 +74,32 @@ class BuildNetwork:
                                                        line.std_type, line.linename)
 
     def createloaddata(self, bus_ident, loads, net, run_pf, loads_ident):
-        load1 = Load(net, bus_ident.get("BUS 3"), 0.1, 0.05, "Load")
+        load1 = Load(net, bus_ident.get("BUS 3"), 50, 0.05, "Load")
         loads.append(load1)
-        run_pf.createload(load1.netname, load1.bus, load1.p_mw, load1.q_mvar, load1.name)
+        load2 = Load(net, bus_ident.get("BUS 4"), 10, 5, "Load 2")
+        loads.append(load2)
+        load3 = Load(net, bus_ident.get("BUS 5"), 70, 5, "Load 2")
+        loads.append(load3)
+        for load in loads:
+            run_pf.createload(load.netname, load.bus, load.p_mw, load.q_mvar, load.name)
 
     def createslackdata(self, bus_ident, net, run_pf, slacks, slacks_ident):
         slack1 = Slack(net, bus_ident.get("BUS 1"), 1.02, "GridConnnection")
         slacks.append(slack1)
-        run_pf.createslack(slack1.netname, slack1.bus, slack1.voltage_pu, slack1.name)
+        run_pf.createslack(slack1.netname, slack1.bus, slack1.voltage_pu, slack1.name,-1000,1000)
 
     def createbusdata(self, bus_ident, bus_list, net, run_pf):
-        bus1 = Bus(net, 20., "BUS 1", True, 1.20, 0.80)
+        bus1 = Bus(net, 220., "BUS 1", True, 1.20, 0.80)
         bus_list.append(bus1)
-        bus2 = Bus(net, 0.4, "BUS 2", True, 1.20, 0.8)
+        bus2 = Bus(net, 110., "BUS 2", True, 1.20, 0.8)
         bus_list.append(bus2)
-        bus3 = Bus(net, 0.4, "BUS 3", True, 1.2, 0.8)
+        bus3 = Bus(net, 110., "BUS 3", True, 1.2, 0.8)
         bus_list.append(bus3)
+        bus4 = Bus(net, 110.,"BUS 4",True,1.20,0.80)
+        bus_list.append(bus4)
+        bus5 = Bus(net, 110.,"BUS 5",True,1.20,0.80)
+        bus_list.append(bus5)
+
         for bus in bus_list:
             bus_str = bus.busname
             bus_ident[bus_str] = run_pf.createbus(bus.net, bus.vn, bus.busname)
