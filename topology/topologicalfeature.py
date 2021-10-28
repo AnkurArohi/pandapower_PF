@@ -24,6 +24,4 @@ class Topology(Run_pf):
               top.calc_distance_to_bus(self.net, self.bus_ident.get("BUS 3")))
 
 
-top_obj = Topology("first top")
-top_obj.checksupply()
-top_obj.create_graph()
+
