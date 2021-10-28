@@ -3,6 +3,27 @@ import pandapower as pp
 import os
 
 
+##Definition of powerflow call method
+#Bus type :- Flat start = PV(angle =0°, V=provided covert to pu)
+#Flat start = PQ(angle =0°, V=1pu)
+#Flat start = UDEL/REF/Slack(angle =0°, V=provided convert to p.u (if not provided take 1 pu))
+#DC->before AC do DC power flow -> calculates angles at PQ,PV,REF , voltage magnitudes are flat started(as above)
+#########################################################################
+#pandapower
+# “auto” - init defaults to “dc” if calculate_voltage_angles is True or “flat” otherwise
+#
+# “flat”- flat start with voltage of 1.0pu and angle of 0° at all PQ-buses and 0° for PV buses as initial solution, the
+# slack bus is initialized with the values provided in net[“ext_grid”]
+#
+# “dc” - initial DC loadflow before the AC loadflow. The results of the DC loadflow are used as initial solution for
+#     the AC loadflow. Note that the DC loadflow only calculates voltage angles at PQ and PV buses, voltage magnitudes are still flat started.
+#
+# “results” - voltage vector of last loadflow from net.res_bus is used as initial solution.
+# This can be useful to accelerate convergence in iterative loadflows like time series calculations.
+# Considering the voltage angles might lead to non-convergence of the power flow in flat start.
+# That is why in “auto” mode, init defaults to “dc” if calculate_voltage_angles is True or “flat” otherwise
+# ##
+
 def createoutputfolder():
     path = 'output'
     # Check whether the specified path exists or not
@@ -43,7 +64,8 @@ class Run_pf(object):
         return self
 
     def execute(self):
-        pp.runpp(self.net)
+        pp.runpp(self.net,calculate_voltage_angles=True , init="dc")
+        #pp.runpp(self.net)
         print(self.net)
         pp.diagnostic(self.net, report_style="compact", warnings_only=True)
         # use only while debugging
