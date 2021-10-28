@@ -1,20 +1,34 @@
 import pandapower as pp
-from pandapowerTest import runpowerflow
 from pandapowerTest.runpowerflow import Run_pf
 
 
 class UpdateValues(Run_pf):
+    def __init__(self, name):
+        super().__init__(name)
+        self.detailednet=super().buildnetwork()
+        self.net=self.detailednet.net
+        self.lines_ident=self.detailednet.lines_ident
+        self.bus_ident=self.detailednet.bus_ident
 
+        #print(self.net.line)
     #net=runpowerflow.Run_pf("Test-Network",net=None).buildnetwork()
     def trafotap(self):
         iterativetap={}
-        net=super().buildnetwork()
-        print("original position=",net.trafo.tap_pos.at[pp.get_element_index(net, "trafo", "Trafo")])
+
+        print("original position=",self.net.trafo.tap_pos.at[pp.get_element_index(self.net, "trafo", "Trafo")])
         for i in range(-5,5):
-            net.trafo.tap_pos.at[pp.get_element_index(net, "trafo", "Trafo")]=i
-            pf=pp.runpp(net)
-            iterativetap[i]=net.res_bus
+            self.net.trafo.tap_pos.at[pp.get_element_index(self.net, "trafo", "Trafo")]=i
+            pf=pp.runpp(self.net)
+            iterativetap[i]=self.net.res_bus
             print(iterativetap)
 
+    def switch(self):
+        print(self.bus_ident)
+        print(self.lines_ident)
+        pp.create_switch(self.net,bus=self.bus_ident["BUS 2"], element=self.lines_ident["Line"],et="1",
+                         closed=False)
+        pp.runpp(self.net)
+        print(self.net.res_bus)
 
 UpdateValues("First modification").trafotap()
+#UpdateValues("First modification").switch()
