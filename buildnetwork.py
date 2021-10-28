@@ -28,7 +28,7 @@ class BuildNetwork:
         if(self.net==None):
             self.net = pp.create_empty_network()
 
-        run_pf = networkcreator.RunningPowerF(self.name)
+        run_pf = networkcreator.CreateDatamodel(self.name)
         self.createbusdata(self.bus_ident, self.bus_list, self.net, run_pf)
 
         # slack/loads/trafos/lines always after bus

@@ -1,5 +1,5 @@
 import pandapower as pp
-from pandapowerTest.runpowerflow import Run_pf
+from pandapowerTest.powerflow import Run_pf
 
 
 class UpdateValues(Run_pf):

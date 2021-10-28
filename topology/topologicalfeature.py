@@ -1,5 +1,5 @@
 import pandapower.topology as top
-from pandapowerTest.runpowerflow import Run_pf
+from pandapowerTest.powerflow import Run_pf
 
 
 class Topology(Run_pf):

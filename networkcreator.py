@@ -1,7 +1,7 @@
 import pandapower as pp
 
 
-class RunningPowerF:
+class CreateDatamodel:
 
     def __init__(self, name):
         self.name = name
