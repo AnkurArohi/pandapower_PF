@@ -3,6 +3,24 @@ import pandapower as pp
 import os
 
 
+def createoutputfolder():
+    path = 'output'
+    # Check whether the specified path exists or not
+    isExist = os.path.exists(path)
+    if not isExist:
+        # Create a new directory because it does not exist
+        os.makedirs(path)
+
+
+def datamodelfolder():
+    path = 'datamodel'
+    # Check whether the specified path exists or not
+    isExist = os.path.exists(path)
+    if not isExist:
+        # Create a new directory because it does not exist
+        os.makedirs(path)
+
+
 class Run_pf(object):
     def __init__(self, name, net=None):
         self.name = name
@@ -23,30 +41,14 @@ class Run_pf(object):
     def buildnetwork(self):
         return self
 
-    def createoutputfolder(self):
-        path = 'output'
-        # Check whether the specified path exists or not
-        isExist = os.path.exists(path)
-        if not isExist:
-            # Create a new directory because it does not exist
-            os.makedirs(path)
-
-    def datamodelfolder(self):
-        path = 'datamodel'
-        # Check whether the specified path exists or not
-        isExist = os.path.exists(path)
-        if not isExist:
-            # Create a new directory because it does not exist
-            os.makedirs(path)
-
     def execute(self):
 
         pp.runpp(self.net)
         print(self.net)
         pp.diagnostic(self.net, report_style="compact", warnings_only=True)
         self.traversedm()
-        self.createoutputfolder()
-        self.datamodelfolder()
+        createoutputfolder()
+        datamodelfolder()
         return self.net
 
     def traversedm(self):

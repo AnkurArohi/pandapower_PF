@@ -22,6 +22,7 @@ class BuildNetwork:
         self.trafos_ident = {}
         self.lines = []
         self.lines_ident = {}
+        self.state=True
 
     def start(self):
         if(self.net==None):
@@ -39,6 +40,9 @@ class BuildNetwork:
         self.createlinedata(self.bus_ident, self.lines, self.net, run_pf,self.lines_ident)
 
         self.createtrafodata(self.bus_ident, self.net, run_pf, self.trafos,self.trafos_ident)
+        #switch after bus and line
+
+        #self.createswitch(self.net,self.bus_ident,self.lines_ident,self.state,run_pf)
 
         return self
 
@@ -79,3 +83,6 @@ class BuildNetwork:
             bus_str = bus.busname
             bus_ident[bus_str] = run_pf.createbus(bus.net, bus.vn, bus.busname)
         return bus_ident
+
+    def createswitch(self,net,bus_ident,lines_ident,state,run_pf):
+        run_pf.createswitches(net,bus_ident.get("BUS 3"),lines_ident.get("Line"),state)
