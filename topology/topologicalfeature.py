@@ -1,10 +1,10 @@
 import pandapower.topology as top
-from pandapowerTest.powerflow import Run_pf
+from pandapowerTest.powerflowstudy.powerflow import Run_pf
 
 
 class Topology(Run_pf):
     def __init__(self, name):
-        super().__init__(name)
+        super().__init__(name,None)
         self.detailednet = super().buildnetwork()
         self.net = self.detailednet.net
 
