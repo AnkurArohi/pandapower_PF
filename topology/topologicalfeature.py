@@ -5,8 +5,8 @@ from pandapowerTest.powerflowstudy.powerflow import RunPf
 class Topology(RunPf):
     def __init__(self, name):
         super().__init__(name,None)
-        self.detailednet = super().buildnetwork()
-        self.net = self.detailednet.net
+        #self.detailednet = super().buildnetwork()
+        #self.net = self.detailednet.net
 
     def checksupply(self):
         print("Here unsupplied buses", top.unsupplied_buses(self.net))
