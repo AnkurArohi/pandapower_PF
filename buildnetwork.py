@@ -62,12 +62,14 @@ class BuildNetwork:
                                                          trafo.trafoname)
 
     def createlinedata(self, bus_ident, lines, net, run_pf, lines_ident):
-        line1 = Line(net, bus_ident.get("BUS 2"), bus_ident.get("BUS 3"), "Line", 0.1, "149-AL1/24-ST1A 110.0")
+        line1 = Line(net, bus_ident.get("BUS 2"), bus_ident.get("BUS 3"), "Line", 1, "149-AL1/24-ST1A 110.0")
         lines.append(line1)
-        line1 = Line(net, bus_ident.get("BUS 3"), bus_ident.get("BUS 4"), "Line 2", 100,  "149-AL1/24-ST1A 110.0")
-        lines.append(line1)
-        line1 = Line(net, bus_ident.get("BUS 4"), bus_ident.get("BUS 5"), "Line 3", 100,  "149-AL1/24-ST1A 110.0")
-        lines.append(line1)
+        line2 = Line(net, bus_ident.get("BUS 3"), bus_ident.get("BUS 4"), "Line 2", 1,  "149-AL1/24-ST1A 110.0")
+        lines.append(line2)
+        line3 = Line(net, bus_ident.get("BUS 3"), bus_ident.get("BUS 5"), "Line 3", 1,  "149-AL1/24-ST1A 110.0")
+        lines.append(line3)
+        line4 = Line(net, bus_ident.get("BUS 4"), bus_ident.get("BUS 5"), "Line 4", 1,  "149-AL1/24-ST1A 110.0")
+        lines.append(line4)
         for line in lines:
             line_str = line.linename
             lines_ident[line_str] = run_pf.createlines(line.netname, line.from_bus, line.to_bus, line.length,
