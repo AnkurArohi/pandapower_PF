@@ -2,7 +2,7 @@ import pandapower as pp
 from pandapowerTest.optimalpf.opf import Opf
 
 
-def analyzingresults():
+def analyzingresults(opf):
     print("OPF output Slack: \n", opf.net.res_ext_grid)
     print("OPF output Gen: \n", opf.net.res_gen)
     sum_p_gen = 0.0
@@ -23,19 +23,25 @@ def analyzingresults():
     print("After OPF line loading: \n", opf.net.res_line.loading_percent)
 
 def permutethroughcostfunc():
-    global opf
+
     print("--------------------- Loss Minimization------------------- \n")
     opf = Opf("Loss minimization")
     pp.runopp(opf.net, verbose=True, delta=1e-16)
-    analyzingresults()
+    analyzingresults(opf)
     print("--------------------- Slack Cheaper------------------------ \n")
     opf = Opf("Slack cheaper")
     pp.runopp(opf.net, verbose=True, delta=1e-16)
-    analyzingresults()
+    analyzingresults(opf)
     print("--------------------- Slack Minimization------------------- \n")
     opf = Opf("avoid Slack")
     pp.runopp(opf.net, verbose=True, delta=1e-16)
-    analyzingresults()
+    analyzingresults(opf)
+
+def opfpowermodel():
+    #Julia implementation not used
+    opf = Opf("Loss minimization")
+    pp.runpm_ac_opf(opf.net)
 
 
 permutethroughcostfunc()
+#opfpowermodel()

@@ -41,8 +41,10 @@ class BuildNetwork:
 
             self.createtrafodata(self.bus_ident, self.net, run_pf, self.trafos, self.trafos_ident)
             ##Generators defined for OPF
-            g0 = pp.create_gen(self.net, self.bus_ident["BUS 4"], p_mw=10, min_p_mw=0, max_p_mw=80, vm_pu=1.01, controllable=True)
-            g1 = pp.create_gen(self.net, self.bus_ident["BUS 5"], p_mw=10, min_p_mw=0, max_p_mw=100, vm_pu=1.01, controllable=True)
+            g0 = pp.create_gen(self.net, self.bus_ident["BUS 4"], p_mw=10, min_p_mw=0, max_p_mw=80, vm_pu=1.01,
+                               controllable=True, cos_phi=0.93, vn_kv=110, sn_mva=5, xdss_pu=0.2, rdss_ohm=5)
+            g1 = pp.create_gen(self.net, self.bus_ident["BUS 5"], p_mw=10, vm_pu=1.01, sn_mva=5,min_p_mw=0, max_p_mw=80,
+                               controllable=True,  vn_kv=110, xdss_pu=0.2,rdss_ohm=5,cos_phi=0.93)
         else:
             print("Example network is provided datamodel is not built")
         # switch after bus and line
