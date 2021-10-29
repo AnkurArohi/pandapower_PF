@@ -33,3 +33,4 @@ class Opf(Topology):
     def modifyconstraints(self, trafo, line):
         self.net.trafo["max_loading_percent"] = trafo
         self.net.line["max_loading_percent"] = line
+
