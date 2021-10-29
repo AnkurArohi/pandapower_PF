@@ -68,7 +68,7 @@ class BuildNetwork:
         lines.append(line1)
         line2 = Line(net, bus_ident.get("BUS 3"), bus_ident.get("BUS 4"), "Line 2", 1,  "149-AL1/24-ST1A 110.0")
         lines.append(line2)
-        line3 = Line(net, bus_ident.get("BUS 3"), bus_ident.get("BUS 5"), "Line 3", 1,  "149-AL1/24-ST1A 110.0")
+        line3 = Line(net, bus_ident.get("BUS 3"), bus_ident.get("BUS 5"), "Line 3", 5,  "149-AL1/24-ST1A 110.0")
         lines.append(line3)
         line4 = Line(net, bus_ident.get("BUS 4"), bus_ident.get("BUS 5"), "Line 4", 1,  "149-AL1/24-ST1A 110.0")
         lines.append(line4)

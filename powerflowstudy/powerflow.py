@@ -24,8 +24,9 @@ import os
 # That is why in “auto” mode, init defaults to “dc” if calculate_voltage_angles is True or “flat” otherwise
 # ##
 
+
 def createoutputfolder():
-    path = 'output'
+    path= 'output'
     # Check whether the specified path exists or not
     isExist = os.path.exists(path)
     if not isExist:
@@ -34,13 +35,13 @@ def createoutputfolder():
 
 
 def datamodelfolder():
-    path = 'datamodel'
+    path_dm= 'datamodel'
     # Check whether the specified path exists or not
-    isExist = os.path.exists(path)
+    isExist = os.path.exists(path_dm)
     if not isExist:
         # Create a new directory because it does not exist
-        os.makedirs(path)
-
+        os.makedirs(path_dm)
+    return path_dm
 
 class RunPf(object):
     def __init__(self, name, net):
@@ -71,7 +72,8 @@ class RunPf(object):
         # use only while debugging
         # self.traversedm()
         createoutputfolder()
-        datamodelfolder()
+        path_dm=datamodelfolder()
+        #pp.to_excel(self.net, path_dm+self.name+".xlsx")
         return self.net
 
     def traversedm(self):
