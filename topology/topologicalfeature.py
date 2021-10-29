@@ -1,11 +1,14 @@
 import pandapower.topology as top
+import pandapower.networks
 from pandapowerTest.powerflowstudy.powerflow import RunPf
 import networkx as nx
 
 
 class Topology(RunPf):
     def __init__(self, name):
-        super().__init__(name,None)
+        #Change here to run OPF on different N/Ws
+        #super().__init__(name,pandapower.networks.mv_oberrhein())
+        super().__init__(name, None)
         self.mg = top.create_nxgraph(self.net, include_trafos=True)
         #self.detailednet = super().buildnetwork()
         #self.net = self.detailednet.net
@@ -48,3 +51,5 @@ class Topology(RunPf):
             print(ind.vn_kv)
 
         print(self.net.bus["vn_kv"])
+        print(self.net.bus.name)
+        print(self.net.res_trafo.vm_lv_pu)

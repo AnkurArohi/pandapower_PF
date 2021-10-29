@@ -38,7 +38,7 @@ def permutethroughcostfunc():
     analyzingresults(opf)
 
 def opfpowermodel():
-    #Julia implementation not used
+    #Juia Implementation not used yet
     opf = Opf("Loss minimization")
     pp.runpm_ac_opf(opf.net)
 
