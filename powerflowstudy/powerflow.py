@@ -60,6 +60,8 @@ class RunPf(object):
         # print(pf.res_line)
         # print(pf.res_trafo)
         # type(net.res_trafo)
+        self.execute()
+
 
     def buildnetwork(self):
         return self

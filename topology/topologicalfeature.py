@@ -5,11 +5,12 @@ import networkx as nx
 
 
 class Topology(RunPf):
-    def __init__(self, name):
+    def __init__(self, name,network):
         #Change here to run OPF on different N/Ws
         #super().__init__(name,pandapower.networks.mv_oberrhein())
-        super().__init__(name, None)
-        self.mg = top.create_nxgraph(self.net, include_trafos=True)
+        super().__init__(name, network)
+        ###comment it in to create graph
+        #self.mg = top.create_nxgraph(self.net, include_trafos=True)
         #self.detailednet = super().buildnetwork()
         #self.net = self.detailednet.net
 

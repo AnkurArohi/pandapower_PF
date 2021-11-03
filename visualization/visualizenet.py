@@ -10,6 +10,6 @@ class Visaulize(RunPf):
         plot.simple_plot(self.net)
 
 
-networks = [pandapower.networks.mv_oberrhein(),None]
+networks = [pandapower.networks.example_multivoltage(),None]
 for network in networks:
     vis=Visaulize("visualize",network)
