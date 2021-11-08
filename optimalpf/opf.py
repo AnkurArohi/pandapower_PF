@@ -21,6 +21,8 @@ class Opf(Topology):
             costeg = pp.create_poly_cost(self.net, 0, 'ext_grid', cp1_eur_per_mw=1)
             costgen1 = pp.create_poly_cost(self.net, 0, 'gen', cp1_eur_per_mw=1)
             costgen2 = pp.create_poly_cost(self.net, 1, 'gen', cp1_eur_per_mw=1)
+            costgen3 = pp.create_poly_cost(self.net, 2, 'gen', cp1_eur_per_mw=1)
+            costgen4 = pp.create_poly_cost(self.net, 3, 'gen', cp1_eur_per_mw=1)
         elif (name == "Slack cheaper"):
             costeg = pp.create_poly_cost(self.net, 0, 'ext_grid', cp1_eur_per_mw=1)
             costgen1 = pp.create_poly_cost(self.net, 0, 'gen', cp1_eur_per_mw=10)

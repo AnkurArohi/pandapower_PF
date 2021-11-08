@@ -39,15 +39,20 @@ class ExecuteOPF:
         print("--------------------- Loss Minimization------------------- \n")
         opf = Opf("Loss minimization", network,self.constraint_i,self.constraint_lb_v,self.constraint_ub_v,
                   self.gen_min_p_mw,self.gen_max_p_mw)
-        pp.runopp(opf.net, verbose=True, delta=1e-1,trafo3w_losses='hv')
+        pp.runopp(opf.net, verbose=True, delta=1000,trafo3w_losses='hv')
+        #pp.rundcopp(opf.net, verbose=True, delta=1e-6, trafo3w_losses='hv')
         self.analyzingresults(opf)
         print("--------------------- Slack Cheaper------------------------ \n")
-        opf = Opf("Slack cheaper")
+        opf = Opf("Slack cheaper",network,self.constraint_i,self.constraint_lb_v,self.constraint_ub_v,
+                  self.gen_min_p_mw,self.gen_max_p_mw)
         pp.runopp(opf.net, verbose=True, delta=1e-16)
+        #pp.rundcopp(opf.net, verbose=True, delta=1e-6, trafo3w_losses='hv')
         self.analyzingresults(opf)
         print("--------------------- Slack Minimization------------------- \n")
-        opf = Opf("avoid Slack")
+        opf = Opf("avoid Slack",network,self.constraint_i,self.constraint_lb_v,self.constraint_ub_v,
+                  self.gen_min_p_mw,self.gen_max_p_mw)
         pp.runopp(opf.net, verbose=True, delta=1e-16)
+        #pp.rundcopp(opf.net, verbose=True, delta=1e-6, trafo3w_losses='hv')
         self.analyzingresults(opf)
 
 
