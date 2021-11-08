@@ -1,5 +1,5 @@
 import pandapower as pp
-from pandapowerTest.powerflowstudy.powerflow import RunPf
+from pandapowerTest.powerflowstudy.src.powerflow import RunPf
 
 
 class UpdateValues(RunPf):

@@ -1,6 +1,5 @@
 import pandapower.plotting as plot
-import pandapower.networks
-from pandapowerTest.powerflowstudy.powerflow import RunPf
+from pandapowerTest.powerflowstudy.src.powerflow import RunPf
 
 
 class Visaulize(RunPf):
@@ -10,6 +9,3 @@ class Visaulize(RunPf):
         plot.simple_plot(self.net)
 
 
-networks = [pandapower.networks.example_multivoltage(),None]
-for network in networks:
-    vis=Visaulize("visualize",network)

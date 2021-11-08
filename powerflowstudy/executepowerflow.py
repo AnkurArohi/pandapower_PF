@@ -1,5 +1,5 @@
 import pandapower.networks
-from pandapowerTest.powerflowstudy.powerflow import RunPf
+from pandapowerTest.powerflowstudy.src.powerflow import RunPf
 
 
 def executeandpublishresults(networks):

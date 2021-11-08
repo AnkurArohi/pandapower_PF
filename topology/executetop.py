@@ -1,9 +1,15 @@
-from pandapowerTest.topology.topologicalfeature import Topology
+import pandapower.networks
+from pandapowerTest.topology.src.topologicalfeature import Topology
 
-top_obj = Topology("first top analysis")
-top_obj.checksupply()
-top_obj.create_graph()
-top_obj.shortestdistance()
-top_obj.determinerings()
+networks = {"MV Oberheim": pandapower.networks.mv_oberrhein(), "example": pandapower.networks.example_simple(),
+            "inbuilt": None}
 
-top_obj.tryingpandasanalysis()
+for key, value in networks.items():
+    # Top cass calls itself(PosConstruct) the other functions
+    print("-------------------------- Currently analysing TOPOLOGICAL Features for this network",key)
+    top_obj = Topology("first top analysis", value)
+    top_obj.checksupply()
+    top_obj.create_graph(value)
+    top_obj.determinerings()
+    if key == "inbuilt":
+        top_obj.shortestdistance()

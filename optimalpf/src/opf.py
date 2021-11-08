@@ -1,4 +1,4 @@
-from pandapowerTest.topology.topologicalfeature import Topology
+from pandapowerTest.topology.src.topologicalfeature import Topology
 import pandapower as pp
 
 

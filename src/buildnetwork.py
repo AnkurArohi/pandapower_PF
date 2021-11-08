@@ -1,11 +1,11 @@
 import pandapower as pp
 
-from pandapowerTest import networkcreator
-from pandapowerTest.networkelems.bus import Bus
-from pandapowerTest.networkelems.line import Line
-from pandapowerTest.networkelems.load import Load
-from pandapowerTest.networkelems.slack import Slack
-from pandapowerTest.networkelems.trafo import Trafo
+from pandapowerTest.src import networkcreator
+from pandapowerTest.networkelems.src.bus import Bus
+from pandapowerTest.networkelems.src.line import Line
+from pandapowerTest.networkelems.src.load import Load
+from pandapowerTest.networkelems.src.slack import Slack
+from pandapowerTest.networkelems.src.trafo import Trafo
 
 
 class BuildNetwork:

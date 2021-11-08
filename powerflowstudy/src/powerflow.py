@@ -1,4 +1,4 @@
-from pandapowerTest.buildnetwork import BuildNetwork
+from pandapowerTest.src.buildnetwork import BuildNetwork
 import pandapower as pp
 import os
 
@@ -26,7 +26,7 @@ import os
 
 
 def createoutputfolder():
-    path= 'output'
+    path= '../output'
     # Check whether the specified path exists or not
     isExist = os.path.exists(path)
     if not isExist:
@@ -35,7 +35,7 @@ def createoutputfolder():
 
 
 def datamodelfolder():
-    path_dm= 'datamodel'
+    path_dm= '../datamodel'
     # Check whether the specified path exists or not
     isExist = os.path.exists(path_dm)
     if not isExist:

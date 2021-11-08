@@ -1,6 +1,6 @@
 import pandapower as pp
-from pandapowerTest.optimalpf.opf import Opf
-import pandapower.networks
+from pandapowerTest.optimalpf.src.opf import Opf
+
 
 class ExecuteOPF:
     def __init__(self,networks,constraint_i,constraint_lb_v,constraint_ub_v,gen_min_p,gen_max_p):
