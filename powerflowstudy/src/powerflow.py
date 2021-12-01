@@ -70,6 +70,7 @@ class RunPf(object):
         pp.runpp(self.net,calculate_voltage_angles=True , init="auto")
         #pp.runpp(self.net)
         print(self.net)
+        #print(self.net.res_bus)
         pp.diagnostic(self.net, report_style="compact", warnings_only=True)
         # use only while debugging
         # self.traversedm()
